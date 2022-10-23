@@ -1,1 +1,1 @@
-# IPYNBRENDERER
+# IPYNBRENDERER Packages project
