@@ -1,0 +1,12 @@
+ipywidgets
+notebook
+ensure
+py-youtube
+
+# Dev Requirements:
+pytest
+tox
+black
+flake8
+mypy
+
