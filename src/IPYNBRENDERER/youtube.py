@@ -5,6 +5,7 @@ from IPYNBRENDERER.custom_exception import InvalidURLException
 from IPYNBRENDERER.logger import logger
 from py_youtube import Data
 
+
 @ensure_annotations
 def get_time_info(URL: str) -> int:
     def _verify_vid_id_len(vid_id, __expected_len=11):
@@ -15,9 +16,11 @@ def get_time_info(URL: str) -> int:
             )
 
     try:
-        split_val = URL.split('=')
+        split_val = URL.split("=")
+        if len(split_val) > 3:
+            raise InvalidURLException
         if "watch" in URL:
-            if ("&t" in URL):
+            if "&t" in URL:
                 vid_id, time = split_val[-2][:-2], int(split_val[-1][:-1])
                 _verify_vid_id_len(vid_id)
                 logger.info(f"video starts at: {time}")
@@ -44,9 +47,8 @@ def get_time_info(URL: str) -> int:
         raise InvalidURLException
 
 
-
 @ensure_annotations
-def render_YouTube_Video(URL: str, width: int=780, height: int=600) -> str:
+def render_YouTube_Video(URL: str, width: int = 780, height: int = 600) -> str:
     try:
         if URL is None:
             raise InvalidURLException("URL cannot be blank")
